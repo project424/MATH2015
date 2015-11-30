@@ -1,0 +1,75 @@
+'ProgramMode:RUN
+{10,10}->Dim Mat Z
+0->Mat Z[1,1]
+Lbl A
+0->Mat Z[2,1]
+0->Theta
+ClrText
+If Mat Z[1,1]=0
+Then Locate 3,3,"F1  Allgemeines"
+Locate 3,4,"F2  Analysis"
+Locate 3,5,"F3  Geometrie"
+Locate 3,6,"F4  Stochastik"
+Do
+Getkey->Mat Z[1,1]
+LpWhile Mat Z[1,1]<>47 And Mat Z[1,1]<>79 And Mat Z[1,1]<>69 And Mat Z[1,1]<>59 And Mat Z[1,1]<>49
+ClrText
+Mat Z[1,1]=47=>Stop
+IfEnd
+If Mat Z[1,1]=79
+Then Locate 2,3,"1  _Log_arithmus"
+Locate 2,4,"2  Polynomdivision"
+Do
+Getkey->Mat Z[2,1]
+LpWhile Mat Z[2,1]<>47 And Mat Z[2,1]<>72 And Mat Z[2,1]<>62
+If Mat Z[2,1]=47
+Then 0->Mat Z[1,1]
+Else Prog "20151"
+IfEnd
+IfEnd
+If Mat Z[1,1]=69
+Then Locate 2,2,"1 Tang. & _Norm _. an"
+Locate 2,3,"  Y1 in B auf Y1"
+Locate 2,4,"2 Tang. durch P"
+Locate 2,5,"  an Y1"
+Locate 2,6,"3 Tang. mit _Ans_t. m"
+Locate 2,7,"  an Y1"
+Do
+Getkey->Mat Z[2,1]
+LpWhile Mat Z[2,1]<>72 And Mat Z[2,1]<>62 And Mat Z[2,1]<>52 And Mat Z[2,1]<>47
+If Mat Z[2,1]=47
+Then 0->Mat Z[1,1]
+Else Prog "20152"
+IfEnd
+IfEnd
+If Mat Z[1,1]=59
+Then Locate 2,1,"1 Vekt_or_multipl."
+Locate 2,2,"2 Ebenengleichungen"
+Locate 2,3,"3 Lagebeziehungen"
+Locate 2,4,"4 Spurpunkte"
+Locate 2,5,"5 Teil-//Mittelpunkt"
+Locate 2,6,"6 Punktspiegelung"
+Locate 2,7,"7 Dreiecke  8 Kreis"
+Do
+Getkey->Mat Z[2,1]
+LpWhile Mat Z[2,1]<>72 And Mat Z[2,1]<>62 And Mat Z[2,1]<>52 And Mat Z[2,1]<>73 And Mat Z[2,1]<>63 And Mat Z[2,1]<>53 And Mat Z[2,1]<>74 And Mat Z[2,1]<>47 And Mat Z[2,1]<>64
+If Mat Z[2,1]=47
+Then 0->Mat Z[1,1]
+Else Prog "20153"
+IfEnd
+IfEnd
+If Mat Z[1,1]=49
+Then Locate 2,2,"1 _&B_omialvert."
+Locate 2,3,"2 Bernoullikettenl."
+Locate 2,4,"3 Hypergeom. Vert."
+Locate 2,5,"4 _Norm _.verteilung"
+Locate 2,6,"5 Wkts.verteilung"
+Do
+Getkey->Mat Z[2,1]
+LpWhile Mat Z[2,1]<>72 And Mat Z[2,1]<>62 And Mat Z[2,1]<>52 And Mat Z[2,1]<>73 And Mat Z[2,1]<>63 And Mat Z[2,1]<>47
+If Mat Z[2,1]=47
+Then 0->Mat Z[1,1]
+Else Prog "20154"
+IfEnd
+IfEnd
+Goto A

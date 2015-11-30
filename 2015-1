@@ -1,0 +1,97 @@
+'ProgramMode:RUN
+0->A~Y
+ClrText
+Mat Z[2,1]=62=>Goto 2
+pifrac69->Mat Z[3,1]
+"     _Log_arithmus"
+"       _log _b=c"
+"          a"
+"     gesucht=X"
+"a="?->Mat Z[4,1]
+"b="?->Mat Z[5,1]
+"c="?->Mat Z[6,1]
+Mat Z[5,1]=Mat Z[2,3]=>Goto Mat Z[5,1]
+Mat Z[6,1]=Mat Z[3,1]=>Goto Mat Z[6,1]
+CXrtMat Z[5,1]->Mat Z[4,1]
+Goto D
+Lbl B
+Mat Z[4,1]^Mat Z[6,1]->Mat Z[5,1]
+Goto D
+Lbl C
+(ln Mat Z[5,1])frac(ln Mat Z[4,1])->Mat Z[6,1]
+Lbl D
+ClrText
+"       _log _b=c"
+"          a"
+" "
+"a="
+"b="
+"c="
+Locate 3,4,Mat Z[4,1]
+Locate 3,5,Mat Z[5,1]
+Locate 3,6,Mat Z[6,1]DispsReturn
+Lbl 2
+"hoechst. _Exp(ae^bx)_onent im Zaehler"?->Mat Z[7,1]
+Int (Mat Z[7,1]+1)->Mat Z[7,1]
+0->Mat Z[8,1]
+Seq(0,Mat Z[8,1],1,Mat Z[7,1],1)->List 1
+List->Mat(List 1)->Mat A
+For 1->Mat Z[9,1] To Mat Z[7,1]
+ClrText
+"ax^"
+Locate 4,1,Mat Z[7,1]-Mat Z[9,1]
+"a="?->Mat A[Mat Z[9,1],1]
+Next
+ClrText
+"hoechst. _Exp(ae^bx)_onent im Nenner"
+?->Mat Z[1,2]
+Int (Mat Z[1,2]+1)->Mat Z[1,2]
+0->Mat Z[2,2]
+Seq(0,Mat Z[2,2],1,Mat Z[1,2],1)->List 1
+List->Mat(List 1)->Mat B
+For 1->Mat Z[3,2] To Mat Z[1,2]
+ClrText
+"ax^"
+Locate 4,1,Mat Z[1,2]-Mat Z[3,2]
+"a="?->Mat B[Mat Z[3,2],1]
+Next
+ClrText
+Dim Mat A->List 1
+List 1[1]->Mat Z[4,2]
+Dim Mat B->List 1
+List 1[1]->Mat Z[5,2]
+Seq(0,Mat Z[2,2],1,Mat Z[4,2]-Mat Z[5,2]+1,1)->List 1
+List->Mat(List 1)->Mat D
+Mat A->Mat C
+For 1->Mat Z[6,2] To Mat Z[4,2]-Mat Z[5,2]+1
+Mat C[I,1]fracMat B[1,1]->Mat Z[2,2]
+B->Mat D[Mat Z[6,2],1]
+For Mat Z[6,2]->Mat Z[7,2] To (Mat Z[6,2]+Mat Z[5,2]-1)
+Mat C[J,1]-BMat B[J-I+1,1]->Mat C[J,1]
+Next
+Next
+"Ergebnis:"DispsDim Mat D->List 1
+List 1[1]->Mat Z[1,2]
+Dim Mat C->List 1
+List 1[1]->Mat Z[2,2]
+For 1->Mat Z[3,2] To Mat Z[1,2]
+If Mat D[Mat Z[3,2],1]<>0
+Then ClrText
+"ax^"
+Locate 4,1,Mat Z[1,2]-Mat Z[3,2]
+"a="
+Mat D[Mat Z[3,2],1]DispsIfEnd
+Next
+ClrText
+"Rest:"Disps1->Mat Z[8,2]
+For 1->Mat Z[3,2] To Mat Z[2,2]
+If Mat C[Mat Z[3,2],1]<>0
+Then 0->Mat Z[8,2]
+ClrText
+"ax^"
+Locate 4,1,Mat Z[2,2]-Mat Z[3,2]
+"a="
+Mat C[Mat Z[3,2],1]DispsIfEnd
+Next
+If Mat Z[8,2]=1
+Then "Kein Rest."DispsIfEnd
